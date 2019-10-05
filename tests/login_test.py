@@ -1,6 +1,8 @@
 from selenium import webdriver
 import time
 import pytest
+from pages.login_page import LoginPage
+from pages.home_page import HomePage
 
 
 class TestLogin:
@@ -17,13 +19,16 @@ class TestLogin:
 
     def test_login(self, test_setup):
         driver.get('https://opensource-demo.orangehrmlive.com/index.php/auth/login')
-        driver.find_element_by_id('txtUsername').send_keys('Admin')
-        driver.find_element_by_id('txtPassword').send_keys('admin123')
-        driver.find_element_by_id('btnLogin').click()
+        login = LoginPage(driver)
+        login.enter_username('Admin')
+        login.enter_password('admin123')
+        login.click_login()
 
     def test_logout(self, test_setup):
-        driver.find_element_by_id('welcome').click()
-        driver.find_element_by_link_text('Logout').click()
+        homepage = HomePage(driver)
+        homepage.click_welcome()
+        homepage.click_logout()
+
 
 
 
