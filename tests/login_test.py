@@ -3,6 +3,7 @@ import time
 import pytest
 from pages.login_page import LoginPage
 from pages.home_page import HomePage
+from utils import utils as utils
 
 
 class TestLogin:
@@ -18,10 +19,10 @@ class TestLogin:
         driver.quit()
 
     def test_login(self, test_setup):
-        driver.get('https://opensource-demo.orangehrmlive.com/index.php/auth/login')
+        driver.get(utils.URL)
         login = LoginPage(driver)
-        login.enter_username('Admin')
-        login.enter_password('admin123')
+        login.enter_username(utils.USERNAME)
+        login.enter_password(utils.PASSWORD)
         login.click_login()
 
     def test_logout(self, test_setup):
